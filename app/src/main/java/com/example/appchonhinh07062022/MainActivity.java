@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     ImageView imgRandom, imgPick;
@@ -22,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
         arrDrawable = getResources().getStringArray(R.array.arrays_drawable);
         resourceRandom = getResources().getIdentifier(arrDrawable[1], "drawable", getPackageName());
         imgRandom.setImageResource(resourceRandom);
+
+        Random random = new Random();
+        int value = random.nextInt(max - min + 1) + min;
+        Log.d("BBB", value + "");
 
     }
 }
