@@ -20,14 +20,10 @@ public class MainActivity extends AppCompatActivity {
 
         imgRandom = findViewById(R.id.imgRandom);
         imgPick = findViewById(R.id.imgPick);
-
         arrDrawable = getResources().getStringArray(R.array.arrays_drawable);
-        resourceRandom = getResources().getIdentifier(arrDrawable[1], "drawable", getPackageName());
+
+        int indexRandom = new Random().nextInt(arrDrawable.length);
+        resourceRandom = getResources().getIdentifier(arrDrawable[indexRandom], "drawable", getPackageName());
         imgRandom.setImageResource(resourceRandom);
-
-        Random random = new Random();
-        int value = random.nextInt(max - min + 1) + min;
-        Log.d("BBB", value + "");
-
     }
 }
