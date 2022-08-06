@@ -17,7 +17,8 @@ public class ListImageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             arrDrawable = intent.getStringArrayExtra("arrDrawable");
-            Log.d("BBB", arrDrawable.length + "");
+            Animal animal = (Animal) intent.getSerializableExtra("animal");
+            Log.d("BBB", animal.weight + "");
         }
     }
 }

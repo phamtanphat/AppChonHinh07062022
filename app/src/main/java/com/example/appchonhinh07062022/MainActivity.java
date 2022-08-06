@@ -42,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         imgPick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Animal animal = new Animal("2");
                 Intent intent = new Intent(MainActivity.this, ListImageActivity.class);
                 intent.putExtra("arrDrawable", arrDrawable);
+                intent.putExtra("animal", animal);
                 startActivity(intent);
             }
         });
