@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:stretchColumns="*"
     tools:context=".ListImageActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TableRow>
+        <TextView
+            android:background="#f20"
+            android:text="View 1"/>
+
+        <TextView
+            android:background="#359DC6"
+            android:text="View 2"/>
+
+        <TextView
+            android:background="#19B819"
+            android:text="View 3"/>
+
+        <TextView
+            android:background="#D92EEC"
+            android:text="View 4"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:layout_span="2"
+            android:layout_column="0"
+            android:background="#2EFFED"
+            android:text="View 5"/>
+    </TableRow>
+</TableLayout>
