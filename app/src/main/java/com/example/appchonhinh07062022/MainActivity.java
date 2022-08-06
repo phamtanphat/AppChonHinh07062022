@@ -3,10 +3,12 @@ package com.example.appchonhinh07062022;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.util.Random;
@@ -21,12 +23,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imgRandom = findViewById(R.id.imgRandom);
-        imgPick = findViewById(R.id.imgPick);
+        initView();
+        initData();
+        event();
+    }
+
+    private void initData() {
         arrDrawable = getResources().getStringArray(R.array.arrays_drawable);
 
         randomImage();
     }
+
+    private void initView() {
+        imgRandom = findViewById(R.id.imgRandom);
+        imgPick = findViewById(R.id.imgPick);
+    }
+
+    private void event() {
+        imgPick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ListImageActivity.class));
+            }
+        });
+    }
+
 
     private void randomImage() {
         int indexRandom = new Random().nextInt(arrDrawable.length);
