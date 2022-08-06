@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         arrDrawable = getResources().getStringArray(R.array.arrays_drawable);
-
         randomImage();
     }
 
@@ -43,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
         imgPick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ListImageActivity.class));
+                Intent intent = new Intent(MainActivity.this, ListImageActivity.class);
+                intent.putExtra("arrDrawable", arrDrawable);
+                startActivity(intent);
             }
         });
     }
