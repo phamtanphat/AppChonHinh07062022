@@ -1,6 +1,7 @@
 package com.example.appchonhinh07062022;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imgRandom, imgPick;
     String[] arrDrawable;
     int resourceRandom;
+    int REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ListImageActivity.class);
                 intent.putExtra("arrDrawable", arrDrawable);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
     }
@@ -70,5 +72,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            int drawableReceive = data.getIntExtra("drawable", -1);
+            Log.d("BBB", drawableReceive + "");
+        }
     }
 }

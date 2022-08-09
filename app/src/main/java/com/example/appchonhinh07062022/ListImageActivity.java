@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,9 +41,23 @@ public class ListImageActivity extends AppCompatActivity {
                         imageView.setLayoutParams(layoutParams);
                         index = (i * 3) + j;
                         imageView.setImageResource(getResources().getIdentifier(arrDrawable[index], "drawable", getPackageName()));
+                        imageView.setTag(getResources().getIdentifier(arrDrawable[index], "drawable", getPackageName()));
+                        imageView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intentData = new Intent();
+                                intentData.putExtra("drawable", (int) imageView.getTag());
+                                setResult(RESULT_OK, intentData);
+                                finish();
+                            }
+                        });
                         tableRow.addView(imageView);
                     }
                     tbLayout.addView(tableRow);
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,20);
+                    LinearLayout linearLayout = new LinearLayout(this);
+                    linearLayout.setLayoutParams(layoutParams);
+                    tbLayout.addView(linearLayout);
                 }
             }
         }
