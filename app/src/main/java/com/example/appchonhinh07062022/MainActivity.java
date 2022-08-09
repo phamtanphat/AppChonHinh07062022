@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -78,8 +79,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            int drawableReceive = data.getIntExtra("drawable", -1);
-            Log.d("BBB", drawableReceive + "");
+            int resourceReceive = data.getIntExtra("drawable", -1);
+            imgPick.setImageResource(resourceReceive);
+            if (resourceReceive == resourceRandom) {
+                Toast.makeText(this, "Chọn chính xác", Toast.LENGTH_SHORT).show();
+                randomImage();
+            } else {
+                Toast.makeText(this, "Sai rồi", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
