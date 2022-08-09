@@ -32,6 +32,21 @@ public class ListImageActivity extends AppCompatActivity {
         if (intent != null) {
             arrDrawable = intent.getStringArrayExtra("arrDrawable");
             Collections.shuffle(Arrays.asList(arrDrawable));
+
+            CountDownManager.setOnListenerCountDown(new CountDownManager.OnListenCountDown() {
+                @Override
+                public void onTick(long currentTime) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    Intent intentData = new Intent();
+                    setResult(RESULT_CANCELED, intentData);
+                    finish();
+                }
+            });
+
             if (arrDrawable != null) {
                 for (int i = 0; i < 6; i++) {
                     TableRow tableRow = new TableRow(ListImageActivity.this);

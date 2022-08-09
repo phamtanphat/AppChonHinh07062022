@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     String[] arrDrawable;
     int resourceRandom;
     int REQUEST_CODE = 1;
+    TextView tvTime;
+    CountDownManager countDownManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +36,41 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         arrDrawable = getResources().getStringArray(R.array.arrays_drawable);
         randomImage();
+        startCountDown();
     }
 
+    private void startCountDown() {
+        countDownManager = new CountDownManager(10000, 1000);
+        countDownManager.start();
+    }
+
+    private void stopCountDown() {
+        if (countDownManager != null) {
+            countDownManager.cancel();
+        }
+    }
     private void initView() {
         imgRandom = findViewById(R.id.imgRandom);
         imgPick = findViewById(R.id.imgPick);
+        tvTime = findViewById(R.id.text_view_time);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CountDownManager.setOnListenerCountDown(new CountDownManager.OnListenCountDown() {
+            @Override
+            public void onTick(long currentTime) {
+                tvTime.setText(String.valueOf((int) (currentTime / 1000)));
+            }
+
+            @Override
+            public void onFinish() {
+                tvTime.setText("0");
+                Toast.makeText(MainActivity.this, "Hết giờ", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void event() {
@@ -70,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_item_refresh:
                 randomImage();
+                stopCountDown();
+                startCountDown();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -87,6 +121,11 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Sai rồi", Toast.LENGTH_SHORT).show();
             }
+            stopCountDown();
+            startCountDown();
+        } else {
+            Toast.makeText(this, "Hết giờ", Toast.LENGTH_SHORT).show();
+            tvTime.setText("0");
         }
     }
 }
